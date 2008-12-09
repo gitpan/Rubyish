@@ -1,0 +1,26 @@
+---
+abstract: 'Perl programming, the rubyish way.'
+author:
+  - 'Kang-min Liu  C<< <gugod@gugod.org> >>, shelling C<shelling@cpan.org>'
+distribution_type: module
+generated_by: 'Module::Install version 0.77'
+license: mit
+meta-spec:
+  url: http://module-build.sourceforge.net/META-spec-v1.4.html
+  version: 1.4
+name: Rubyish
+no_index:
+  directory:
+    - inc
+    - t
+    - examples
+requires:
+  Class::Inspector: 0
+  Data::Dumper: 0
+  Devel::Declare: 0.003003
+  Rubyish::Attribute: 1.0
+  Sub::Exporter: 0
+  UNIVERSAL::isa: 0
+  YAML: 0
+  perl: 5.01
+version: 0.30
