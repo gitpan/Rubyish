@@ -1,6 +1,6 @@
 package Rubyish;
 use 5.010;
-our $VERSION = "0.30";
+our $VERSION = "0.31";
 
 use strict;
 use warnings;
@@ -14,6 +14,8 @@ sub import {
         eval qq{
                 package $caller;
                 use Rubyish::Kernel;
+                use Rubyish::Syntax::class;
+
                };
     }
     else {
