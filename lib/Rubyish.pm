@@ -1,6 +1,6 @@
 package Rubyish;
 use 5.010;
-our $VERSION = "0.31";
+our $VERSION = "0.32";
 
 use strict;
 use warnings;
@@ -29,10 +29,15 @@ sub import {
             package $caller;
             use Rubyish::Syntax::def;
             use Rubyish::Syntax::nil;
+            use Rubyish::Syntax::true;
             use Rubyish::String;
             use Rubyish::Array;
             use Rubyish::Hash;
+            use Rubyish::Dir;
            };
+
+    require Rubyish::Autobox;
+    Rubyish::Autobox::import($caller);
 };
 
 1;
@@ -100,7 +105,7 @@ Kang-min Liu  C<< <gugod@gugod.org> >>, shelling C<shelling@cpan.org>
 
 =head1 LICENCE AND COPYRIGHT
 
-Copyright (c) 2008, Kang-min Liu C<< <gugod@gugod.org> >>.
+Copyright (c) 2008,2009, Kang-min Liu C<< <gugod@gugod.org> >>.
 
 This is free software, licensed under:
 
@@ -128,4 +133,3 @@ RENDERED INACCURATE OR LOSSES SUSTAINED BY YOU OR THIRD PARTIES OR A
 FAILURE OF THE SOFTWARE TO OPERATE WITH ANY OTHER SOFTWARE), EVEN IF
 SUCH HOLDER OR OTHER PARTY HAS BEEN ADVISED OF THE POSSIBILITY OF
 SUCH DAMAGES.
-

@@ -1,29 +1,17 @@
-package Rubyish::Syntax::class;
-use Devel::Declare;
+package Rubyish::Syntax::true;
 
-sub class { $_[0]->(); };
-
-sub import {
-    my ($class) = @_;
-    my $caller = caller;
-
-    {
-        no strict;
-        *{"${caller}::class"} = \&class;
+use strict;
+use Sub::Exporter;
+Sub::Exporter::setup_exporter({
+    exports => ['true'],
+    groups => {
+        default => ['true']
     }
+});
 
-    Devel::Declare->setup_for(
-        $caller => {
-            'class' => [
-                DECLARE_PACKAGE,
-                sub {
-                    my ($usepack, $use, $inpack, $name, $proto, $is_block) = @_;
-                    return (sub (&) { shift; }, undef, "package ${name}; use Rubyish;");
-                }
-            ]
-        }
-    );
-};
+use Rubyish::TrueClass;
+
+sub true { Rubyish::TrueClass->new }
 
 1;
 
@@ -31,41 +19,38 @@ __END__
 
 =head1 NAME
 
-Rubyish::Syntax::class - Define a new class with "class"
+Rubyish::Syntax::true - Gives you a true object.
 
 =head1 SYNOPSIS
 
-    class Foo {
-        def hi {
-            print "Hello World"
-        }
-    }
+    use Rubyish::Syntax::true;
 
-    Foo->can("new"); # true
-    Foo->can("hi");  # true
+    my $a = true;
 
 =head1 DESCRIPTION
 
-This module injects a C<class> keyword into your current name space,
-and make it declare a new L<Rubyish::Class>.
+This module exports a C<true> bareword that works almost like Ruby
+C<true>. It represents the singleton object of L<Rubyish::TrueClass>.
+It means boolean true under boolean context, "true" when stringified.
 
-The simpliest usage looks like this:
+It also keep the behaviour that true always referes to the same,
+singleton object whenever it's used in the program.
 
-    class MyClass {
+=head1 METHODS
 
-    }
+The C<true> object has following instance methods:
 
-C<def> is also injected:
+=over 4
 
-    class MyClass {
-        def hi {
-            print "Hello";
-        }
-    }
+=item to_s
 
-If you're interested in how this is done, read the source code of this
-file, or ask L<Devel::Declare> people. Or read the tests of
-L<Devel::Declare>.
+Returns "true"
+
+=back
+
+=head1 SEE ALSO
+
+L<Rubyish::TrueClass> for the implementation of these methods.
 
 =head1 AUTHOR
 

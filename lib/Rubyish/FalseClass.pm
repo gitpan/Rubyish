@@ -1,29 +1,25 @@
-package Rubyish::Syntax::class;
-use Devel::Declare;
+package Rubyish::FalseClass;
+use strict;
+use warnings;
 
-sub class { $_[0]->(); };
+use base qw(Rubyish::Object);
+use Rubyish::Kernel;
+use Rubyish::Syntax::def;
 
-sub import {
-    my ($class) = @_;
-    my $caller = caller;
+def to_s { String("false") };
 
-    {
-        no strict;
-        *{"${caller}::class"} = \&class;
+def object_id { 3 };
+{ no strict; *__id__ = *object_id; }
+
+{
+    my $obj = bless {}, __PACKAGE__;
+    sub new {
+        return $obj if defined $obj;
+        $obj = bless {}, __PACKAGE__;
+        return $obj;
     }
+}
 
-    Devel::Declare->setup_for(
-        $caller => {
-            'class' => [
-                DECLARE_PACKAGE,
-                sub {
-                    my ($usepack, $use, $inpack, $name, $proto, $is_block) = @_;
-                    return (sub (&) { shift; }, undef, "package ${name}; use Rubyish;");
-                }
-            ]
-        }
-    );
-};
 
 1;
 
@@ -31,41 +27,37 @@ __END__
 
 =head1 NAME
 
-Rubyish::Syntax::class - Define a new class with "class"
+Rubyish::FalseClass - The FalseClass implementation
 
 =head1 SYNOPSIS
 
-    class Foo {
-        def hi {
-            print "Hello World"
-        }
-    }
-
-    Foo->can("new"); # true
-    Foo->can("hi");  # true
+    false->to_i
+    false->to_f
+    false->to_a
 
 =head1 DESCRIPTION
 
-This module injects a C<class> keyword into your current name space,
-and make it declare a new L<Rubyish::Class>.
+This class defnes those instance methods availble for the singleton object C<FalseClass>
 
-The simpliest usage looks like this:
+=over 4
 
-    class MyClass {
+=item to_i
 
-    }
+Always returns 0
 
-C<def> is also injected:
+=item to_f
 
-    class MyClass {
-        def hi {
-            print "Hello";
-        }
-    }
+Always returns 0.0
 
-If you're interested in how this is done, read the source code of this
-file, or ask L<Devel::Declare> people. Or read the tests of
-L<Devel::Declare>.
+=item to_s
+
+Always returns an string "false"
+
+=item to_a
+
+Always returns []
+
+=back
 
 =head1 AUTHOR
 
@@ -101,5 +93,6 @@ RENDERED INACCURATE OR LOSSES SUSTAINED BY YOU OR THIRD PARTIES OR A
 FAILURE OF THE SOFTWARE TO OPERATE WITH ANY OTHER SOFTWARE), EVEN IF
 SUCH HOLDER OR OTHER PARTY HAS BEEN ADVISED OF THE POSSIBILITY OF
 SUCH DAMAGES.
+
 
 

@@ -41,9 +41,9 @@ Rubyish::NilClass - The NilClass implementation
 
 =head1 SYNOPSIS
 
-    nil.to_i
-    nil.to_f
-    nil.to_a
+    nil->to_i
+    nil->to_f
+    nil->to_a
 
 =head1 DESCRIPTION
 
@@ -75,7 +75,7 @@ Kang-min Liu  C<< <gugod@gugod.org> >>, shelling C<shelling@cpan.org>
 
 =head1 LICENCE AND COPYRIGHT
 
-Copyright (c) 2008, Kang-min Liu C<< <gugod@gugod.org> >>.
+Copyright (c) 2008,2009, Kang-min Liu C<< <gugod@gugod.org> >>.
 
 This is free software, licensed under:
 

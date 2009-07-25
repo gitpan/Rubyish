@@ -15,6 +15,8 @@ This is almost all for the internals of Rubyish Perl.
 =cut
 
 package Rubyish::Object;
+use feature qw(switch);
+
 use UNIVERSAL::isa;
 use Scalar::Util qw(refaddr);
 use Rubyish::Syntax::def;
@@ -130,7 +132,7 @@ Returns a string containing a human-readable representation of obj.
 
 =cut
 
-def inspect { 
+def inspect {
     scalar($self) =~ /\w+=\w+(\((.*)\))/;
     "#<" . ref($self) . ":" . $2 . ">";
 };
@@ -147,6 +149,15 @@ def ancestors {
     # not completed
 };
 
+=head2 clone
+
+Produces a shollow copy a object. New object would not have the same memory address as ordinary object.
+
+=cut
+
+use Clone;
+*clone = *Clone::clone;
+
 1;
 
 =head1 AUTHOR
@@ -155,7 +166,7 @@ Kang-min Liu  C<< <gugod@gugod.org> >>, shelling C<shelling@cpan.org>
 
 =head1 LICENCE AND COPYRIGHT
 
-Copyright (c) 2008, Kang-min Liu C<< <gugod@gugod.org> >>.
+Copyright (c) 2008,2009, Kang-min Liu C<< <gugod@gugod.org> >>.
 
 This is free software, licensed under:
 
@@ -183,6 +194,3 @@ RENDERED INACCURATE OR LOSSES SUSTAINED BY YOU OR THIRD PARTIES OR A
 FAILURE OF THE SOFTWARE TO OPERATE WITH ANY OTHER SOFTWARE), EVEN IF
 SUCH HOLDER OR OTHER PARTY HAS BEEN ADVISED OF THE POSSIBILITY OF
 SUCH DAMAGES.
-
-
-

@@ -1,6 +1,6 @@
 =head1 NAME
 
-Rubyish::Array - Array object acts as ruby
+Rubyish::Array - Array (class)
 
 =cut
 
@@ -104,5 +104,25 @@ def each($sub) {
     $self;
 };
 { no strict; *map = *each; }
+
+=head2 first
+
+Not Documented
+
+=cut
+
+def first {
+    $self->[0];
+};
+
+=head2 last
+
+Not Documented
+
+=cut
+
+def last {
+    $self->[length(@{$self})];
+};
 
 1;

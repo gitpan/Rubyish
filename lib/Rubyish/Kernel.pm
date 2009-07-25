@@ -1,3 +1,9 @@
+=head1
+
+Rubyish::Kernel - Kernel (module)
+
+=cut
+
 package Rubyish::Kernel;
 use strict;
 use Rubyish::Hash;
@@ -90,7 +96,7 @@ Kang-min Liu  C<< <gugod@gugod.org> >>, shelling C<shelling@cpan.org>
 
 =head1 LICENCE AND COPYRIGHT
 
-Copyright (c) 2008, Kang-min Liu C<< <gugod@gugod.org> >>.
+Copyright (c) 2008,2009, Kang-min Liu C<< <gugod@gugod.org> >>.
 
 This is free software, licensed under:
 
@@ -118,6 +124,3 @@ RENDERED INACCURATE OR LOSSES SUSTAINED BY YOU OR THIRD PARTIES OR A
 FAILURE OF THE SOFTWARE TO OPERATE WITH ANY OTHER SOFTWARE), EVEN IF
 SUCH HOLDER OR OTHER PARTY HAS BEEN ADVISED OF THE POSSIBILITY OF
 SUCH DAMAGES.
-
-
-
